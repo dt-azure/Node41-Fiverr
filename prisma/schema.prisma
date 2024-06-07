@@ -1,0 +1,94 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model comments {
+  id           Int       @id @default(autoincrement())
+  gig_id       Int?
+  commenter_id Int?
+  comment_date DateTime? @db.DateTime(0)
+  content      String?   @db.VarChar(1000)
+  rating       Decimal?  @db.Decimal(10, 2)
+  removed      Boolean?  @default(false)
+  backup       String?   @db.VarChar(1000)
+  gig          gig?      @relation(fields: [gig_id], references: [gig_id], onDelete: NoAction, onUpdate: NoAction, map: "comments_ibfk_1")
+  user         user?     @relation(fields: [commenter_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "comments_ibfk_2")
+
+  @@index([commenter_id], map: "commenter_id")
+  @@index([gig_id], map: "gig_id")
+}
+
+model gig {
+  gig_id          Int              @id @default(autoincrement())
+  gig_name        String?          @db.VarChar(250)
+  reviews         Int?
+  price           Int?
+  photo           String?          @db.VarChar(4000)
+  gig_desc        String?          @db.Text
+  short_gig_desc  String?          @db.VarChar(500)
+  rating          Decimal?         @db.Decimal(10, 2)
+  subcategory     Int?
+  seller_id       Int?
+  removed         Boolean?         @default(false)
+  comments        comments[]
+  user            user?            @relation(fields: [seller_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "gig_ibfk_1")
+  gig_subcategory gig_subcategory? @relation(fields: [subcategory], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "gig_ibfk_2")
+  gig_order       gig_order[]
+
+  @@index([seller_id], map: "seller_id")
+  @@index([subcategory], map: "subcategory")
+}
+
+model gig_category {
+  id              Int               @id @default(autoincrement())
+  category_name   String?           @db.VarChar(100)
+  gig_subcategory gig_subcategory[]
+}
+
+model gig_order {
+  id         Int       @id @default(autoincrement())
+  gig_id     Int?
+  buyer_id   Int?
+  order_date DateTime? @db.DateTime(0)
+  status     Boolean?
+  removed    Boolean?  @default(false)
+  gig        gig?      @relation(fields: [gig_id], references: [gig_id], onDelete: NoAction, onUpdate: NoAction, map: "gig_order_ibfk_1")
+  user       user?     @relation(fields: [buyer_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "gig_order_ibfk_2")
+
+  @@index([buyer_id], map: "buyer_id")
+  @@index([gig_id], map: "gig_id")
+}
+
+model gig_subcategory {
+  id                Int           @id @default(autoincrement())
+  subcategory_name  String?       @db.VarChar(100)
+  subcategory_photo String?       @db.VarChar(4000)
+  category_id       Int?
+  subcategory_items String?       @db.Text
+  gig               gig[]
+  gig_category      gig_category? @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "gig_subcategory_ibfk_1")
+
+  @@index([category_id], map: "category_id")
+}
+
+model user {
+  user_id       Int         @id @default(autoincrement())
+  full_name     String?     @db.VarChar(250)
+  email         String?     @db.VarChar(100)
+  password      String?     @db.VarChar(100)
+  phone         String?     @db.VarChar(20)
+  birthday      String?     @db.VarChar(20)
+  gender        String?     @db.VarChar(50)
+  role          String?     @db.VarChar(10)
+  skill         String?     @db.Text
+  certification String?     @db.Text
+  avatar        String?     @db.VarChar(4000)
+  comments      comments[]
+  gig           gig[]
+  gig_order     gig_order[]
+}
