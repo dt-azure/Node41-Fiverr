@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { PrismaClient } from "@prisma/client";
 import { UserQueryType, UserType } from "./entities/user.entity";
-
+import * as bcrypt from 'bcrypt'
 
 const formatStrToArr = (str: string) => {
     if (!str || str == "") {
@@ -128,9 +128,14 @@ export class UserService {
             throw new HttpException("Invalid role input.", HttpStatus.BAD_REQUEST)
         }
 
+        // Add user if all checks pass
+
+        // Hash password
+        let hashedPassword = bcrypt.hashSync(body.password, 10)
+
         try {
             await this.prisma.user.create({
-                data: { ...body, skill: formatArrToStr(body.skill), certification: formatArrToStr(body.certification), avatar: "" }
+                data: { ...body, password: hashedPassword, skill: formatArrToStr(body.skill), certification: formatArrToStr(body.certification), avatar: "" }
             })
 
             return { message: "User created successfully.", status: HttpStatus.CREATED }
@@ -166,20 +171,26 @@ export class UserService {
     }
 
     async updateUser(email: string, role: string, id: number, body: any) {
-        // let { email } = body
-        const user = await this.prisma.user.findFirst({
+
+        const idCheck = await this.prisma.user.findFirst({
             where: {
-                user_id: id * 1
+                user_id: id
             }
         })
 
         // Throw an error if ID is not valid
-        if (!user) {
+        if (!idCheck) {
             throw new HttpException("User does not exist.", HttpStatus.NOT_FOUND)
         }
 
-        // Only only users to change their own info
-        if (email !== user.email) {
+        // Users can only change their own info
+        const user = await this.prisma.user.findFirst({
+            where: {
+                user_id: id
+            }
+        })
+
+        if (email !== user.email && user.role !== "ADMIN") {
             throw new HttpException("Unauthorized.", HttpStatus.UNAUTHORIZED)
         }
 
@@ -200,15 +211,33 @@ export class UserService {
             throw new HttpException("Invalid role input.", HttpStatus.BAD_REQUEST)
         }
 
+        // Update user info if all checks pass
+
         if (role === "ADMIN") {
             try {
                 // ADMINS can edit everything, although there should be different tiers of ADMINS with different authority
+                // Email should not be changed in any case for identification purposes
+                // But it's allowed for now
+
+                // Check if new email is already in use
+                let emailCheck = await this.prisma.user.findFirst({
+                    where: {
+                        email: body.email
+                    }
+                })
+
+                if (emailCheck) {
+                    throw new HttpException("Email is already in use.", HttpStatus.BAD_REQUEST)
+                }
+
+                // Hash password
+                let hashedPassword = bcrypt.hashSync(body.password, 10)
 
                 await this.prisma.user.update({
                     where: {
                         user_id: id * 1
                     },
-                    data: { ...body, email:body.email, role: body.role, skill: formatArrToStr(body.skill), certification: formatArrToStr(body.certification) }
+                    data: { ...body, email: body.email, password: hashedPassword, skill: formatArrToStr(body.skill), certification: formatArrToStr(body.certification) }
                 })
 
                 return { message: "User updated successfully.", status: HttpStatus.OK }
@@ -217,13 +246,18 @@ export class UserService {
             }
         } else {
             try {
-                // User cannot change email and role
+                // Users cannot change email and role
+
+
+                // Hash password
+                let hashedPassword = bcrypt.hashSync(body.password, 10)
 
                 await this.prisma.user.update({
                     where: {
                         user_id: id * 1
                     },
-                    data: { ...body, skill: formatArrToStr(body.skill), certification: formatArrToStr(body.certification) }
+                    // Prevent changes to role column by assigning its existing value
+                    data: { ...body, password: hashedPassword, role: user.role, skill: formatArrToStr(body.skill), certification: formatArrToStr(body.certification) }
                 })
 
                 return { message: "User updated successfully.", status: HttpStatus.OK }

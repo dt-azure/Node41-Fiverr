@@ -3,6 +3,8 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaClient } from '@prisma/client';
 import { UserSignUpType } from './entities/auth.entity';
+import * as bcrypt from 'bcrypt'
+
 
 @Injectable()
 export class AuthService {
@@ -15,11 +17,18 @@ export class AuthService {
         let user = await this.prisma.findFirst({
             where: {
                 email: email,
-                password: password
             }
         })
-
+    
+        // Check for email
         if (!user) {
+            throw new HttpException("Email or password is incorrect.", HttpStatus.BAD_REQUEST)
+        }
+
+        // Check for password
+        let passwordCheck = bcrypt.compareSync(password, user.password)
+   
+        if (!passwordCheck) {
             throw new HttpException("Email or password is incorrect.", HttpStatus.BAD_REQUEST)
         }
 
@@ -49,10 +58,15 @@ export class AuthService {
             throw new HttpException(`Email is already in use. - ${user}`, HttpStatus.BAD_REQUEST)
         }
 
+        // Hashing password
+        let hashedPassword = bcrypt.hashSync(body.password, 10)
+        
+
         try {
             await this.prisma.create({
                 data: {
                     ...body,
+                    password: hashedPassword,
                     role: "USER"
                 }
             })
