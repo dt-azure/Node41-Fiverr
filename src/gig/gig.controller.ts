@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, HttpException, Param, Post, Put, Query, Req, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { GigService } from './gig.service';
-import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiConsumes, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { QueryType } from 'src/util/types';
 import { Request } from 'express';
@@ -8,9 +8,10 @@ import { checkUserRole } from 'src/util/util';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { SubcategoryPhotoDto } from 'src/subcategory/dto/subcategory.dto';
+import { GigAddDto, GigUpdateAdminDto, GigUpdateDto } from './dto/gig.dto';
 
 @ApiTags("Gig")
-@Controller('gig')
+@Controller('api/gig')
 export class GigController {
   constructor(private readonly gigService: GigService) { }
 
@@ -25,6 +26,9 @@ export class GigController {
   }
 
   @Get("/get-gig-with-query")
+  @ApiQuery({ name: "pageIndex", required: true })
+  @ApiQuery({ name: "pageSize", required: true })
+  @ApiQuery({ name: "keyword", required: false })
   getAllUsersWithQuery(@Query("pageIndex") pageIndex: number, @Query("pageSize") pageSize: number, @Query("keyword") keyword: string) {
     let params: QueryType = { pageIndex: +pageIndex, pageSize: +pageSize, keyword: keyword }
 
@@ -45,6 +49,7 @@ export class GigController {
   }
 
   @UseGuards(AuthGuard('jwt'))
+  @ApiBody({ type: GigAddDto })
   @Post()
   addGig(@Req() req: Request, @Body() body) {
     // Requires token, and restriction will be handled by frontend
@@ -58,6 +63,7 @@ export class GigController {
   }
 
   @UseGuards(AuthGuard('jwt'))
+  @ApiBody({ type: GigUpdateDto })
   @Put("/:id")
   updateGig(@Req() req: Request, @Param("id") id: number, @Body() body) {
     let email = req.user["data"].email
@@ -70,6 +76,7 @@ export class GigController {
   }
 
   @UseGuards(AuthGuard('jwt'))
+  @ApiBody({ type: GigUpdateAdminDto })
   @Put("admin-update/:id")
   updateGigWithAdminPrivilege(@Req() req: Request, @Param("id") id: number, @Body() body) {
     let decodedToken = req.user
@@ -117,7 +124,7 @@ export class GigController {
   }))
   updateGigPhoto(@Req() req: Request, @UploadedFile() file: Express.Multer.File, @Param("id") id: number) {
     let user = req.user["data"]
-    
+
     try {
       return this.gigService.updateGigPhoto(user, +id, file.path)
 

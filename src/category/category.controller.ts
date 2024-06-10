@@ -3,10 +3,11 @@ import { CategoryService } from './category.service';
 import { AuthGuard } from '@nestjs/passport';
 import { Request } from 'express';
 import { checkUserRole } from 'src/util/util';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
+import { CategoryAddDto } from './dto/category.dto';
 
 @ApiTags("Category")
-@Controller('category')
+@Controller('api/category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) { }
 
@@ -29,6 +30,7 @@ export class CategoryController {
   }
 
   @UseGuards(AuthGuard("jwt"))
+  @ApiBody({ type: CategoryAddDto })
   @Post()
   addCategory(@Req() req: Request, @Body() body) {
     let decodedToken = req.user
@@ -44,6 +46,7 @@ export class CategoryController {
   }
 
   @UseGuards(AuthGuard("jwt"))
+  @ApiBody({ type: CategoryAddDto })
   @Put("/:id")
   updateCategory(@Req() req: Request, @Param("id") id: number, @Body() body) {
     let decodedToken = req.user

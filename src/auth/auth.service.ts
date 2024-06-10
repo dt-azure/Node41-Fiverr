@@ -31,7 +31,7 @@ export class AuthService {
         }, { expiresIn: "1w", algorithm: "HS256" })
 
         return {
-            message: "Log in successful.",
+            message: "Login successful.",
             status: HttpStatus.OK,
             token
         }

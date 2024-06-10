@@ -1,16 +1,17 @@
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, Query, Req, UploadedFile, UseGuards, UseInterceptors } from "@nestjs/common";
 import { UserService } from "./user.service";
-import { ApiBody, ApiConsumes, ApiTags } from "@nestjs/swagger";
+import { ApiBody, ApiConsumes, ApiParam, ApiQuery, ApiTags } from "@nestjs/swagger";
 import { UserQueryType, UserType } from "./entities/user.entity";
 import { Request } from "express";
-import { AvatarUploadDto } from "./dto/user.dto";
+import { AvatarUploadDto, UserAddDto } from "./dto/user.dto";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { diskStorage } from "multer";
 import { AuthGuard } from "@nestjs/passport";
 import { checkUserRole } from "src/util/util";
+import { ApiQueryDto } from "src/util/dto";
 
 @ApiTags("User")
-@Controller('users')
+@Controller('api/users')
 export class UserController {
     constructor(private readonly userService: UserService) { }
 
@@ -20,12 +21,21 @@ export class UserController {
         let decodedToken = req.user
 
         // Only allow users with admin privilege to access full data
-       checkUserRole(decodedToken["data"].role)
+        checkUserRole(decodedToken["data"].role)
 
-        return this.userService.getAllUsers()
+
+        try {
+            return this.userService.getAllUsers()
+        } catch (exception) {
+            throw new HttpException(exception.response, exception.status)
+        }
+
     }
 
     @UseGuards(AuthGuard('jwt'))
+    @ApiQuery({ name: "pageIndex", required: true })
+    @ApiQuery({ name: "pageSize", required: true })
+    @ApiQuery({ name: "keyword", required: false })
     @Get("get-users-with-query")
     getAllUsersWithQuery(@Req() req: Request, @Query("pageIndex") pageIndex: number, @Query("pageSize") pageSize: number, @Query("keyword") keyword: string) {
         let params: UserQueryType = { pageIndex: +pageIndex, pageSize: +pageSize, keyword: keyword ? keyword : "" }
@@ -34,7 +44,12 @@ export class UserController {
         // Only allow users with admin privilege to access full data
         checkUserRole(decodedToken["data"].role)
 
-        return this.userService.getAllUsersWithQuery(params)
+
+        try {
+            return this.userService.getAllUsersWithQuery(params)
+        } catch (exception) {
+            throw new HttpException(exception.response, exception.status)
+        }
     }
 
     @Get("/:id")
@@ -48,6 +63,7 @@ export class UserController {
     }
 
     @UseGuards(AuthGuard('jwt'))
+    @ApiBody({ type: UserAddDto })
     @Post()
     addUser(@Req() req: Request, @Body() body) {
         let decodedToken = req.user
@@ -78,9 +94,10 @@ export class UserController {
     }
 
     @UseGuards(AuthGuard('jwt'))
+    @ApiBody({ type: UserAddDto })
     @Put("/:id")
     updateUser(@Req() req: Request, @Param("id") id: number, @Body() body) {
-        let {email, role} = req.user["data"]
+        let { email, role } = req.user["data"]
 
         try {
             return this.userService.updateUser(email, role, +id, body)

@@ -1,13 +1,14 @@
 import { Body, Controller, Delete, Get, HttpException, Param, Post, Put, Query, Req, UseGuards } from '@nestjs/common';
 import { OrderService } from './order.service';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { Request } from 'express';
 import { checkUserRole } from 'src/util/util';
 import { OrderFormType, OrderUpdateFormType } from './entities/order.entity';
+import { OrderAddDto, OrderUpdateDto } from './dto/order.dto';
 
 @ApiTags("Order")
-@Controller('order')
+@Controller('api/order')
 export class OrderController {
   constructor(private readonly orderService: OrderService) { }
 
@@ -27,7 +28,7 @@ export class OrderController {
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Get("user-order")
+  @Get("orders-by-user")
   getAllUserOrders(@Req() req: Request) {
     let user = req.user["data"]
 
@@ -66,6 +67,7 @@ export class OrderController {
   }
 
   @UseGuards(AuthGuard('jwt'))
+  @ApiBody({ type: OrderAddDto })
   @Post()
   addOrder(@Req() req: Request, @Body() body: OrderFormType) {
     let user = req.user
@@ -78,6 +80,7 @@ export class OrderController {
   }
 
   @UseGuards(AuthGuard('jwt'))
+  @ApiBody({ type: OrderUpdateDto })
   @Put("/:id")
   updateOrder(@Req() req: Request, @Param("id") id: number, @Body() body: OrderUpdateFormType) {
     let decodedToken = req.user

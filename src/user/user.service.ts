@@ -72,7 +72,7 @@ export class UserService {
                 }
             }
         })
-        
+
         let userList = []
         data.map((item) => {
             let newUser = exclude(item, "password")
@@ -99,17 +99,34 @@ export class UserService {
     }
 
     async addUser(body: any) {
-        let { email } = body
+        let { email, birthday, gender, role } = body
 
         // Throw an error if email is already in use
-        if (this.prisma.user.findFirst({
+        let userData = await this.prisma.user.findFirst({
             where: {
                 email: email
             }
-        })) {
+        })
+        console.log(userData);
+        if (userData) {
             throw new HttpException("Email is already in use.", HttpStatus.BAD_REQUEST)
         }
 
+        // Validation: for now only checks for birthday, gender and role
+        // Birthday: only check if it's a valid date, the format should be handled on the front end
+        let dateCheck = new Date(birthday).toString()
+
+        if (dateCheck == "Invalid Date") {
+            throw new HttpException("Invalid birthday.", HttpStatus.BAD_REQUEST)
+        }
+
+        if (!["MALE", "FEMALE", "NONBINARY"].includes(gender)) {
+            throw new HttpException("Invalid gender input.", HttpStatus.BAD_REQUEST)
+        }
+
+        if (!["USER", "ADMIN"].includes(role)) {
+            throw new HttpException("Invalid role input.", HttpStatus.BAD_REQUEST)
+        }
 
         try {
             await this.prisma.user.create({
@@ -156,7 +173,7 @@ export class UserService {
             }
         })
 
-        // Throw an error if id is not valid
+        // Throw an error if ID is not valid
         if (!user) {
             throw new HttpException("User does not exist.", HttpStatus.NOT_FOUND)
         }
@@ -166,19 +183,53 @@ export class UserService {
             throw new HttpException("Unauthorized.", HttpStatus.UNAUTHORIZED)
         }
 
-        try {
-            // Only admin can change email, restriction should be done on Front End
-            
-            await this.prisma.user.update({
-                where: {
-                    user_id: id * 1
-                },
-                data: { ...body, email: role == "ADMIN" ? body.email : user.email , skill: formatArrToStr(body.skill), certification: formatArrToStr(body.certification) }
-            })
+        // Validation: for now only checks for birthday, gender and role
+        // Birthday: only check if it's a valid date, the format should be handled on the front end
+        let dateCheck = new Date(body.birthday).toString()
 
-            return { message: "User updated successfully.", status: HttpStatus.OK }
-        } catch (err) {
-            throw new HttpException("An error has occurred.", HttpStatus.BAD_REQUEST)
+        if (dateCheck == "Invalid Date") {
+            throw new HttpException("Invalid birthday.", HttpStatus.BAD_REQUEST)
+        }
+
+        if (!["MALE", "FEMALE", "NONBINARY"].includes(body.gender)) {
+            throw new HttpException("Invalid gender input.", HttpStatus.BAD_REQUEST)
+        }
+
+        // Only ADMINS can change role, so user input has to be handled by frontend
+        if (!["USER", "ADMIN"].includes(role)) {
+            throw new HttpException("Invalid role input.", HttpStatus.BAD_REQUEST)
+        }
+
+        if (role === "ADMIN") {
+            try {
+                // ADMINS can edit everything, although there should be different tiers of ADMINS with different authority
+
+                await this.prisma.user.update({
+                    where: {
+                        user_id: id * 1
+                    },
+                    data: { ...body, email:body.email, role: body.role, skill: formatArrToStr(body.skill), certification: formatArrToStr(body.certification) }
+                })
+
+                return { message: "User updated successfully.", status: HttpStatus.OK }
+            } catch (err) {
+                throw new HttpException("An error has occurred.", HttpStatus.BAD_REQUEST)
+            }
+        } else {
+            try {
+                // User cannot change email and role
+
+                await this.prisma.user.update({
+                    where: {
+                        user_id: id * 1
+                    },
+                    data: { ...body, skill: formatArrToStr(body.skill), certification: formatArrToStr(body.certification) }
+                })
+
+                return { message: "User updated successfully.", status: HttpStatus.OK }
+            } catch (err) {
+                throw new HttpException("An error has occurred.", HttpStatus.BAD_REQUEST)
+            }
         }
 
     }

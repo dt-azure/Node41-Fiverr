@@ -4,14 +4,14 @@ import { QueryType } from 'src/util/types';
 import { Request } from 'express';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
-import { SubcategoryPhotoDto } from './dto/subcategory.dto';
+import { SubcategoryAddDto, SubcategoryAddWithItemsDto, SubcategoryListAddDto, SubcategoryPhotoDto } from './dto/subcategory.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { checkUserRole } from 'src/util/util';
 import { SubcategoryType, SubcategoryTypeWithList } from './entities/subcategory.entity';
 
 @ApiTags("Subcategory")
-@Controller('subcategory')
+@Controller('api/subcategory')
 export class SubcategoryController {
   constructor(private readonly subcategoryService: SubcategoryService) { }
 
@@ -42,6 +42,7 @@ export class SubcategoryController {
   }
 
   @UseGuards(AuthGuard('jwt'))
+  @ApiBody({ type: SubcategoryAddDto })
   @Post()
   addSubcatogery(@Req() req: Request, @Body() body: SubcategoryType) {
     let decodedToken = req.user
@@ -57,6 +58,7 @@ export class SubcategoryController {
   }
 
   @UseGuards(AuthGuard('jwt'))
+  @ApiBody({ type: SubcategoryAddWithItemsDto })
   @Put("/:id")
   updateSubcategory(@Req() req: Request, @Body() body: SubcategoryTypeWithList, @Param("id") id: number) {
     let decodedToken = req.user
@@ -72,6 +74,7 @@ export class SubcategoryController {
   }
 
   @UseGuards(AuthGuard('jwt'))
+  @ApiBody({type: SubcategoryListAddDto})
   @Post("add-subcategory-items/:id")
   addSubcategoryItems(@Req() req: Request, @Body() body, @Param("id") id: number) {
     let decodedToken = req.user
