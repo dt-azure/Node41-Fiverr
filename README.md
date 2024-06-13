@@ -1,6 +1,5 @@
-## BACKEND FOR FIVERR CLONE
 <p align="center">
-  This is the backend for my Fiverr clone.
+  ##This is the backend for my Fiverr clone.
 </p>
 
 
@@ -12,13 +11,13 @@ MySQL for database management.
 
 ## Running backend
 
-####Set up database
+#### Set up database
 - Set up a MySQL server on Docker
 
 - Import SQL dump file (fiverr_db.sql). It can be found in the root folder.
 ___Please note that the backup database contains user accounts with unhashed password and they should be ignored. You should create new accounts instead___
 
-####Set up environment file
+#### Set up environment file
 - Create a ".env" file in the root folder and add the following variables:
 
 ```
@@ -28,7 +27,7 @@ JWT_REFRESH_SECRET_KEY = ""
 ```
 - Edit the file with appropriate info of your choosing
 
-####Install dependencies
+#### Install dependencies
 Use command:
 ```
   yarn install
@@ -37,9 +36,9 @@ Use command:
 ####Run backend
 Use command:
 ```
-  yarn run:dev
+  yarn run
 ```
-####Test backend
+#### Test backend
 Backend is set up to run on port 8080 (http://localhost:8080/)
 
 2 ways to test backend:
