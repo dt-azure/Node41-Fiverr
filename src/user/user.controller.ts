@@ -1,20 +1,22 @@
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, Query, Req, UploadedFile, UseGuards, UseInterceptors } from "@nestjs/common";
 import { UserService } from "./user.service";
-import { ApiBody, ApiConsumes, ApiParam, ApiQuery, ApiTags } from "@nestjs/swagger";
-import { UserQueryType, UserType } from "./entities/user.entity";
+import { ApiBody, ApiConsumes, ApiQuery, ApiTags } from "@nestjs/swagger";
+import { UserQueryType } from "./entities/user.entity";
 import { Request } from "express";
 import { AvatarUploadDto, UserAddDto } from "./dto/user.dto";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { diskStorage } from "multer";
 import { AuthGuard } from "@nestjs/passport";
 import { checkUserRole } from "src/util/util";
-import { ApiQueryDto } from "src/util/dto";
+
+
 
 @ApiTags("User")
 @Controller('api/users')
 export class UserController {
     constructor(private readonly userService: UserService) { }
 
+    // @UseGuards(JwtAuthGuard)
     @UseGuards(AuthGuard('jwt'))
     @Get()
     getAllUsers(@Req() req: Request) {

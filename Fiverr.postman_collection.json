@@ -1,0 +1,1414 @@
+{
+	"info": {
+		"_postman_id": "4fd2be39-256b-4b94-bbf8-99dac9d5879c",
+		"name": "Fiverr",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33109408"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Log In",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"janett.doe1@gmail.com\",\r\n    \"password\": \"Janett123@\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/auth/log-in",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"log-in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"full_name\": \"Janett Doe\",\r\n    \"email\": \"janett.doe1@gmail.com\",\r\n    \"password\": \"Janett123@\",\r\n    \"phone\": \"123-456-7891\",\r\n    \"birthday\": \"01/01/1990\",\r\n    \"gender\": \"FEMALE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/auth/sign-up",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Renew Token",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NjYzMTcsImV4cCI6MTcxODI3MTExN30.BRrVajhWtUJ3Uz-GgtizvKSuls9m6ZyZCYVvJ1J806g",
+								"description": "Wrong token",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZXR0LmRvZTFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTcxODI1OTIwMCwiZXhwIjoxNzE4ODY0MDAwfQ.U2-T5sMPzySoUiQ6eXOaNXU9tDp5-AipG29ya8gXP6U",
+								"description": "Correct token\n"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/auth/refresh-token",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Log Out",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZXR0LmRvZTFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTcxODI2MDA1MSwiZXhwIjoxNzE4MjYwOTUxfQ.iDhQpD0LEAHHdFOovpNPmuaeijX_bMyWIt9J78-KoWs"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/auth/log-out",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"log-out"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NjYzMTcsImV4cCI6MTcxODI3MTExN30.BRrVajhWtUJ3Uz-GgtizvKSuls9m6ZyZCYVvJ1J806g"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZXR0LmRvZTFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTcxODEwMTgwMCwiZXhwIjoxNzE4MTAxODEwfQ.NLPpx_qszCuudfQ-GFyDZ7c3pBwtwIwQ3MyoXTHHcUY",
+								"description": "Test",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/users",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users With Query",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NjYzMTcsImV4cCI6MTcxODI3MTExN30.BRrVajhWtUJ3Uz-GgtizvKSuls9m6ZyZCYVvJ1J806g"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/users/get-users-with-query?pageIndex=1&pageSize=5",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"get-users-with-query"
+							],
+							"query": [
+								{
+									"key": "pageIndex",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/users/9",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"9"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NjYzMTcsImV4cCI6MTcxODI3MTExN30.BRrVajhWtUJ3Uz-GgtizvKSuls9m6ZyZCYVvJ1J806g"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"full_name\": \"John Doe\",\r\n  \"email\": \"john.doe5@gmail.com\",\r\n  \"password\": \"John123@\",\r\n  \"phone\": \"123-456-7891\",\r\n  \"birthday\": \"05/01/1995\",\r\n  \"gender\": \"MALE\",\r\n  \"role\": \"ADMIN\",\r\n  \"skill\": [\r\n    \r\n  ],\r\n  \"certification\": [\r\n    \r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/users",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/users/19",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"19"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI",
+								"description": "Admin",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZXR0LmRvZTFAZ21haWwuY29tIiwicm9sZSI6IlVTRVIifSwiaWF0IjoxNzE4MDE3Njg2LCJleHAiOjE3MTg2MjI0ODZ9.njlmJXDHtmhinh_O57paQWOiigNB6SxrCJPGUVAsUDM",
+								"description": "User"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"full_name\": \"Janett D. Doe\",\r\n  \"email\": \"janett.doe1@gmail.com\",\r\n  \"password\": \"Janett123@\",\r\n  \"phone\": \"123-456-7892\",\r\n  \"birthday\": \"01/01/1990\",\r\n  \"gender\": \"FEMALE\",\r\n  \"role\": \"ADMIN\",\r\n  \"skill\": [\r\n    \"HTML\", \"CSS\", \"ReactJS\"\r\n  ],\r\n  \"certification\": [\r\n    \"Cert 1\", \"Cert 2\"\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/users/19",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"19"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Avatar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NjYzMTcsImV4cCI6MTcxODI3MTExN30.BRrVajhWtUJ3Uz-GgtizvKSuls9m6ZyZCYVvJ1J806g"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Azure/Desktop/Fiverr/colin-2x.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/users/upload-avatar",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"upload-avatar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Get All Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/category",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/category/1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category_name\": \"AI\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/category/1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category_name\": \"AI Prompts\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/category/11",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"category",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/category/14",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"category",
+								"14"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subcategory",
+			"item": [
+				{
+					"name": "Get All Subcategory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/subcategory",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"subcategory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Subcategory By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/subcategory/2",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"subcategory",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Subcategory With Query",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/subcategory/get-subcategory-with-query?pageIndex=1&pageSize=5",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"subcategory",
+								"get-subcategory-with-query"
+							],
+							"query": [
+								{
+									"key": "pageIndex",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "5"
+								},
+								{
+									"key": "keyword",
+									"value": "art",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Subcategory",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subcategory_name\": \"Visual Design\",\r\n    \"category_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/subcategory",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"subcategory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Subcategory",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subcategory_name\": \"Presentation Design\",\r\n    \"category_id\": 1,\r\n    \"subcategory_items\": [\"Image Editing\", \"Presentation Design\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/subcategory/22",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"subcategory",
+								"22"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Subcategory",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/subcategory/22",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"subcategory",
+								"22"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Subcategory Photo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Azure/Desktop/Fiverr/logo-fiverr.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/subcategory/update-photo/22",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"subcategory",
+								"update-photo",
+								"22"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Subcategory Items",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subcategory_items\": [\r\n        \"Flyer Design\",\r\n        \"Brochure Design\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/subcategory/add-subcategory-items/21",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"subcategory",
+								"add-subcategory-items",
+								"21"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Gig",
+			"item": [
+				{
+					"name": "Get All Gigs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/gig",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"gig"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Gigs With Query",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/gig/get-gig-with-query?pageIndex=1&pageSize=10",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"gig",
+								"get-gig-with-query"
+							],
+							"query": [
+								{
+									"key": "pageIndex",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "keyword",
+									"value": "design",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Gig By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/gig/59",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"gig",
+								"59"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Gig",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"gig_name\": \"Test\",\r\n    \"reviews\": 15,\r\n    \"price\": 100,\r\n    \"gig_desc\": \"Test\",\r\n    \"short_gig_desc\": \"Test\",\r\n    \"subcategory\": 21\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/gig",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"gig"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Gig",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"gig_name\": \"Test\",\r\n    \"price\": 200,\r\n    \"gig_desc\": \"Test Test Test\",\r\n    \"short_gig_desc\": \"Test\",\r\n    \"subcategory\": 21\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/gig/61",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"gig",
+								"61"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Gig With Admin Privilege",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"gig_name\": \"Test TEST TEST\",\r\n    \"reviews\": 10,\r\n    \"price\": 200,\r\n    \"gig_desc\": \"Test Test Test\",\r\n    \"rating\": 3.4,\r\n    \"short_gig_desc\": \"Test\",\r\n    \"subcategory\": 10,\r\n    \"removed\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/gig/admin-update/63",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"gig",
+								"admin-update",
+								"63"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Gig",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI",
+								"description": "Admin"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiam9obi5kb2U2QGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIn0sImlhdCI6MTcxNzY3MTQ0MCwiZXhwIjoxNzE4Mjc2MjQwfQ.e9MOocGd6vLXJ9DvLNcPXPJ7Ynuym_MmZMbJs7b7Ks0",
+								"description": "User",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/gig/65",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"gig",
+								"65"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Gig Photo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI",
+								"description": "Admin\n"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiam9obi5kb2U2QGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIn0sImlhdCI6MTcxNzY3MTQ0MCwiZXhwIjoxNzE4Mjc2MjQwfQ.e9MOocGd6vLXJ9DvLNcPXPJ7Ynuym_MmZMbJs7b7Ks0",
+								"description": "User",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Azure/Desktop/Fiverr/colin-2x.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/gig/update-gig-photo/61",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"gig",
+								"update-gig-photo",
+								"61"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Get All Orders",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/order",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"order"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Orders By User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/order/orders-by-user",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"order",
+								"orders-by-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order By ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/order/4",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"order",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Orders With Query",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/order/get-orders-with-query?pageIndex=1&pageSize=5",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"order",
+								"get-orders-with-query"
+							],
+							"query": [
+								{
+									"key": "pageIndex",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"gig_id\": 54\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/order",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Order",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": true,\r\n    \"removed\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/order/3s",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"order",
+								"3s"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Order",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/order/3",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"order",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comment",
+			"item": [
+				{
+					"name": "Get All Comments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/comment",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Comments By Gig ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/comment/45",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"comment",
+								"45"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Comments With Query",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/comment/get-comments-with-query?pageIndex=1&pageSize=10&email=jane",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"comment",
+								"get-comments-with-query"
+							],
+							"query": [
+								{
+									"key": "pageIndex",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "email",
+									"value": "jane"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"gig_id\": 46,\r\n    \"content\": \"Great\",\r\n    \"rating\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/comment",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Comment",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiam9obi5kb2VAZ21haWwuY29tIiwicm9sZSI6IlVTRVIifSwiaWF0IjoxNzE4MDAyMTc4LCJleHAiOjE3MTg2MDY5Nzh9.H6-zzWkPcDBCtp2fCjXFez8mZoZs0TWkdM3UeNTGagI",
+								"description": "User",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI",
+								"description": "Admin"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"Great!\",\r\n    \"rating\": 4.5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/comment/3",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"comment",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Comment With Admin Privilege",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiam9obi5kb2VAZ21haWwuY29tIiwicm9sZSI6IlVTRVIifSwiaWF0IjoxNzE4MDAyMTc4LCJleHAiOjE3MTg2MDY5Nzh9.H6-zzWkPcDBCtp2fCjXFez8mZoZs0TWkdM3UeNTGagI",
+								"description": "User",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI",
+								"description": "Admin"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"Great!\",\r\n    \"rating\": 4.5,\r\n    \"removed\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/comment/update-admin/3",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"comment",
+								"update-admin",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Comment",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiam9obi5kb2VAZ21haWwuY29tIiwicm9sZSI6IlVTRVIifSwiaWF0IjoxNzE4MDAyMTc4LCJleHAiOjE3MTg2MDY5Nzh9.H6-zzWkPcDBCtp2fCjXFez8mZoZs0TWkdM3UeNTGagI",
+								"description": "User",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiamFuZS5kb2UxQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE3MTc2NzAxMzUsImV4cCI6MTcxODI3NDkzNX0.__wKUEu0QoOlBIjsp9wKUiXuxRM6Jxr14t9aosEp2YI",
+								"description": "Admin"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/comment/3",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"comment",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "domain",
+			"value": "localhost:8080",
+			"type": "string"
+		}
+	]
+}

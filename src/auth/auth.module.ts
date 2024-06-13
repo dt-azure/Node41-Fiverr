@@ -6,7 +6,7 @@ import { JwtModule } from '@nestjs/jwt';
 // export const jwtSecretKey = "SECRET_KEY"
 
 @Module({
-  imports: [JwtModule.register({ global: true, secret: process.env.JWT_SECRET_KEY })],
+  imports: [JwtModule.register({ global: true })],
   controllers: [AuthController],
   providers: [AuthService]
 })
