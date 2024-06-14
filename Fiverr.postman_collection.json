@@ -494,11 +494,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{domain}}/subcategory",
+							"raw": "{{domain}}/api/subcategory",
 							"host": [
 								"{{domain}}"
 							],
 							"path": [
+								"api",
 								"subcategory"
 							]
 						}
@@ -511,11 +512,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{domain}}/subcategory/2",
+							"raw": "{{domain}}/api/subcategory/2",
 							"host": [
 								"{{domain}}"
 							],
 							"path": [
+								"api",
 								"subcategory",
 								"2"
 							]
@@ -529,11 +531,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{domain}}/subcategory/get-subcategory-with-query?pageIndex=1&pageSize=5",
+							"raw": "{{domain}}/api/subcategory/get-subcategory-with-query?pageIndex=1&pageSize=5",
 							"host": [
 								"{{domain}}"
 							],
 							"path": [
+								"api",
 								"subcategory",
 								"get-subcategory-with-query"
 							],
@@ -576,11 +579,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{domain}}/subcategory",
+							"raw": "{{domain}}/api/subcategory",
 							"host": [
 								"{{domain}}"
 							],
 							"path": [
+								"api",
 								"subcategory"
 							]
 						}
@@ -607,11 +611,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{domain}}/subcategory/22",
+							"raw": "{{domain}}/api/subcategory/22",
 							"host": [
 								"{{domain}}"
 							],
 							"path": [
+								"api",
 								"subcategory",
 								"22"
 							]
@@ -630,11 +635,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{domain}}/subcategory/22",
+							"raw": "{{domain}}/api/subcategory/22",
 							"host": [
 								"{{domain}}"
 							],
 							"path": [
+								"api",
 								"subcategory",
 								"22"
 							]
@@ -663,11 +669,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{domain}}/subcategory/update-photo/22",
+							"raw": "{{domain}}/api/subcategory/update-photo/22",
 							"host": [
 								"{{domain}}"
 							],
 							"path": [
+								"api",
 								"subcategory",
 								"update-photo",
 								"22"
@@ -696,11 +703,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{domain}}/subcategory/add-subcategory-items/21",
+							"raw": "{{domain}}/api/subcategory/add-subcategory-items/21",
 							"host": [
 								"{{domain}}"
 							],
 							"path": [
+								"api",
 								"subcategory",
 								"add-subcategory-items",
 								"21"
@@ -720,11 +728,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{domain}}/gig",
+							"raw": "{{domain}}/api/gig",
 							"host": [
 								"{{domain}}"
 							],
 							"path": [
+								"api",
 								"gig"
 							]
 						}
@@ -737,11 +746,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{domain}}/gig/get-gig-with-query?pageIndex=1&pageSize=10",
+							"raw": "{{domain}}/api/gig/get-gig-with-query?pageIndex=1&pageSize=10",
 							"host": [
 								"{{domain}}"
 							],
 							"path": [
+								"api",
 								"gig",
 								"get-gig-with-query"
 							],
@@ -770,11 +780,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{domain}}/gig/59",
+							"raw": "{{domain}}/api/gig/59",
 							"host": [
 								"{{domain}}"
 							],
 							"path": [
+								"api",
 								"gig",
 								"59"
 							]
@@ -802,11 +813,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{domain}}/gig",
+							"raw": "{{domain}}/api/gig",
 							"host": [
 								"{{domain}}"
 							],
 							"path": [
+								"api",
 								"gig"
 							]
 						}
@@ -833,11 +845,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{domain}}/gig/61",
+							"raw": "{{domain}}/api/gig/61",
 							"host": [
 								"{{domain}}"
 							],
 							"path": [
+								"api",
 								"gig",
 								"61"
 							]
@@ -865,11 +878,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{domain}}/gig/admin-update/63",
+							"raw": "{{domain}}/api/gig/admin-update/63",
 							"host": [
 								"{{domain}}"
 							],
 							"path": [
+								"api",
 								"gig",
 								"admin-update",
 								"63"
@@ -896,11 +910,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{domain}}/gig/65",
+							"raw": "{{domain}}/api/gig/65",
 							"host": [
 								"{{domain}}"
 							],
 							"path": [
+								"api",
 								"gig",
 								"65"
 							]
@@ -936,11 +951,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{domain}}/gig/update-gig-photo/61",
+							"raw": "{{domain}}/api/gig/update-gig-photo/61",
 							"host": [
 								"{{domain}}"
 							],
 							"path": [
+								"api",
 								"gig",
 								"update-gig-photo",
 								"61"
@@ -1105,8 +1121,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "",
-								"type": "text"
+								"value": ""
 							}
 						],
 						"body": {

@@ -190,7 +190,7 @@ export class UserService {
             }
         })
 
-        if (email !== user.email && user.role !== "ADMIN") {
+        if (email !== user.email && role !== "ADMIN") {
             throw new HttpException("Unauthorized.", HttpStatus.UNAUTHORIZED)
         }
 
